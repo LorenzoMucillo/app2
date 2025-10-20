@@ -1,0 +1,81 @@
+import 'dart:math';
+
+void main() {
+  print("Hello world!");
+
+  var text1 = "Renan";
+  var text2 = "é um bunda mole";
+  var delta = Ddelta;
+
+  print("$text1 $text2");
+
+  const double numPi = 3.1415;
+  final DateTime data = DateTime.now();
+
+  print("PI = $numPi");
+  print("Data = $data");
+
+  dynamic valor = "Um texto...";
+  print(valor is String);
+
+  valor = 10;
+  print(valor is int);
+
+  print("Área do retângulo 6.6 x 7.4:");
+  print(areaRetangulo(6.6, 7.4));
+  print("Área do trapézio:");
+  print(areaTrapezio(bMaior: 3.7, bMenor: 5.7, a: 3.4));
+
+  final double a_bhaskara = 1;
+  final double b_bhaskara = -5;
+  final double c_bhaskara = 6;
+
+  print("\nValor de Delta para ($a_bhaskara, $b_bhaskara, $c_bhaskara):");
+  final deltaValue = delta(a_bhaskara, b_bhaskara, c_bhaskara);
+  print(deltaValue);
+
+  print("\nCalculando Bhaskara para ($a_bhaskara, $b_bhaskara, $c_bhaskara):");
+  final bhaskaraRoots = calculateBhaskara(a_bhaskara, b_bhaskara, c_bhaskara);
+  if (bhaskaraRoots == null) {
+    print("Não há raízes reais para a equação.");
+  } else {
+    print("x1 = ${bhaskaraRoots[0]}, x2 = ${bhaskaraRoots[1]}");
+  }
+}
+
+double areaRetangulo(double base, double altura) {
+  return base * altura;
+}
+
+double areaTrapezio({
+  double bMenor = 0,
+  double bMaior = 0,
+  double a = 0,
+}) {
+  return ((bMaior + bMenor) * a) / 2;
+}
+
+double Ddelta(double a, double b, double c) {
+  return (b * b) - (4 * a * c);
+}
+
+List<double>? calculateBhaskara(double a, double b, double c) {
+  if (a == 0) {
+    if (b == 0) {
+      return null;
+    }
+    
+    return [-c / b, -c / b];
+  }
+
+  final delta = Ddelta(a, b, c);
+
+  if (delta < 0) {
+    return null;
+  } else {
+    final sqrtDelta = sqrt(delta);
+    final x1 = (-b + sqrtDelta) / (2 * a);
+    final x2 = (-b - sqrtDelta) / (2 * a);
+    return [x1, x2];
+  }
+}
